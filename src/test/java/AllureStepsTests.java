@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import steps.ApiSteps;
 import steps.WebSteps;
+import testBase.TestBase;
 
 import static com.codeborne.selenide.Selenide.closeWebDriver;
 import static config.Config.config;
@@ -18,8 +19,7 @@ import static config.Config.config;
 @Story("Использование Lambda steps")
 @Owner("Dmitriy")
 @Tag("allureStepsTests")
-public class AllureStepsTests {
-
+public class AllureStepsTests extends TestBase {
 
     private static final String REPOSITORY = config().getRepository();
 
@@ -33,13 +33,6 @@ public class AllureStepsTests {
     private WebSteps webSteps = new WebSteps();
     private ApiSteps apiSteps = new ApiSteps();
 
-    @BeforeEach
-    public void initListener() {
-        SelenideLogger.addListener("allure", new AllureSelenide()
-                .savePageSource(true)
-                .screenshots(true));
-    }
-
     @Test
     public void createNewIssue() {
         webSteps.openLoginForm();
@@ -51,11 +44,6 @@ public class AllureStepsTests {
         webSteps.createNewIssue(TITLE, BUG_LABEL);
         int number = webSteps.getIssueNumber();
         apiSteps.checkByNumber(number, TOKEN);
-    }
-
-    @AfterEach
-    public void closeDriver() {
-        closeWebDriver();
     }
 
 }

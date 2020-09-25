@@ -7,6 +7,7 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
+import testBase.TestBase;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
@@ -22,7 +23,7 @@ import static org.hamcrest.Matchers.is;
 @Story("Использование Lambda steps")
 @Owner("Dmitriy")
 @Tag("allureLambdaTests")
-public class AllureLambdaTests {
+public class AllureLambdaTests extends TestBase {
 
 
     private static final String REPOSITORY = config().getRepository();
@@ -34,13 +35,6 @@ public class AllureLambdaTests {
     private static final String BUG_LABEL = "bug";
     private static final String TITLE = config().getTitle();
     private int issue;
-
-    @BeforeEach
-    public void initListener() {
-        SelenideLogger.addListener("allure", new AllureSelenide()
-                .savePageSource(true)
-                .screenshots(true));
-    }
 
     @Test
     void createNewIssue() {
@@ -115,10 +109,5 @@ public class AllureLambdaTests {
                     .body("title", is(config().getTitle()));
             // @formatter:on
         });
-    }
-
-    @AfterEach
-    public void closeDriver() {
-        closeWebDriver();
     }
 }

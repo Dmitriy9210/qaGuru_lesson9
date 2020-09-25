@@ -4,6 +4,7 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
+import testBase.TestBase;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selectors.withText;
@@ -17,7 +18,7 @@ import static org.hamcrest.Matchers.is;
 
 
 @Tag("allureListeners")
-public class AllureListeners {
+public class AllureListeners extends TestBase {
 
     private static final String REPOSITORY = config().getRepository();
 
@@ -28,13 +29,6 @@ public class AllureListeners {
     private static final String BUG_LABEL = "bug";
     private static final String TITLE = config().getTitle();
     private int issue;
-
-    @BeforeEach
-    public void initListener() {
-        SelenideLogger.addListener("allure", new AllureSelenide()
-                .savePageSource(true)
-                .screenshots(true));
-    }
 
     @Test
     void createNewIssue() {
@@ -91,13 +85,5 @@ public class AllureListeners {
                     .body("assignee.login", is(config().getAssignee()))
                     .body("title", is(config().getTitle()));
             // @formatter:on
-    }
-
-
-
-
-    @AfterEach
-    public void closeDriver() {
-        closeWebDriver();
     }
 }
