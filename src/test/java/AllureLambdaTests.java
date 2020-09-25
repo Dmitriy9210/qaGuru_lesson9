@@ -5,10 +5,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selectors.byText;
@@ -24,7 +21,7 @@ import static org.hamcrest.Matchers.is;
 @Feature("Создание новой задачи")
 @Story("Использование Lambda steps")
 @Owner("Dmitriy")
-
+@Tag("allureLambdaTests")
 public class AllureLambdaTests {
 
 

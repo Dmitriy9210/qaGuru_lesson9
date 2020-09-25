@@ -5,6 +5,7 @@ import io.qameta.allure.Story;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import steps.ApiSteps;
 import steps.WebSteps;
@@ -16,7 +17,7 @@ import static config.Config.config;
 @Feature("Создание новой задачи")
 @Story("Использование Lambda steps")
 @Owner("Dmitriy")
-
+@Tag("allureStepsTests")
 public class AllureStepsTests {
 
 
