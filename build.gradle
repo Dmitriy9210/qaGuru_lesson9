@@ -40,3 +40,31 @@ dependencies {
     compile("org.junit.jupiter:junit-jupiter-engine:5.6.2")
     compile("org.junit.jupiter:junit-jupiter-params:5.6.2")
 }
+
+tasks.withType(Test) {
+    systemProperties = System.properties
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}
+
+task allureStepsTests_tests(type: Test) {
+    useJUnitPlatform {
+        includeTags 'allureStepsTests'
+    }
+}
+
+task allureListeners_tests(type: Test){
+    useJUnitPlatform {
+        excludeTags 'allureListeners'
+    }
+}
+
+task allureLambdaTests_tests(type: Test){
+    useJUnitPlatform {
+        excludeTags 'allureLambdaTests'
+    }
+}
